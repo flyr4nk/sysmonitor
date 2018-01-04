@@ -1,0 +1,37 @@
+basic:
+  listen: ":22222"
+  enableWeb: true
+
+system:
+  cpuLimit: 80
+  memLimit: 95
+  diskLimit: 90
+  systemLoad: 3.0
+
+wechat:
+  enable: true
+  url: http://10.117.200.107:18081/wechat/send
+  header: qh-messenger:wechat
+
+cleaner:
+  enable: true
+  dir:  /opt/jetty/logs
+  time: 2d
+
+processes:
+  - name: jetty
+    cpuLimit: 1
+    memLimit: 5
+    connLimit: 10
+    fileLimit: 1
+    threadLimit: 1
+    isRun: true
+    exists: true
+  - name: monitor
+    cpuLimit: 1
+    memLimit: 5
+    connLimit: 10
+    fileLimit: 1
+    threadLimit: 1
+    isRun: true
+    exists: true

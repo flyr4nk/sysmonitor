@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SysMonitor</title>
+    <link rel="shortcut icon" href="http://oss.aliyuncs.com/qhstatic/img/logo.ico"/>
+    <style>
+        h1, body, h2, h3, h4 {
+            margin: 0 auto;
+            font-family: "Microsoft Yahei", "Droid Sans", arial, sans-serif;
+            font-size: 12pt;
+        }
+
+        .head-title {
+            font-size: 18pt;
+            text-align: center;
+            padding-top: 10px;
+        }
+        .head {
+            color: white;
+            background-color: deepskyblue;
+            width: 100%;
+            height: 50px;
+            box-shadow:2px 2px 3px #aaaaaa;
+        }
+        .content {
+            padding-left: 60px;
+            padding-top: 60px;
+            margin: 50px auto 0;
+            width: 80%;
+            border: 3px solid deepskyblue;
+            min-height: 300px;
+        }
+
+        .metrics {
+            display: inline-block;
+            color: #555;
+            padding-left: 30px;
+        }
+
+        table {
+            margin-top: 35px;
+            border: 2px solid deepskyblue;
+            border-collapse:collapse;
+        }
+        th,td {border: 1px solid deepskyblue;}
+
+        td {
+            min-width: 80px;
+        }
+
+        .head-text {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .config {
+            margin-top:20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="head">
+        <h1 class="head-title">Sysmonitor</h1>
+    </div>
+    <div class="content">
+        System Information:
+        <div class="metrics">Cpu usage: {{ .System.CpuPercent }}</div>
+        <div class="metrics">Mem usage: {{ .System.MemPercent }}</div>
+        <div class="metrics">Disk usage: {{ .System.DiskPercent }}</div>
+        <div class="metrics">System load: {{ .System.SystemLoad }}</div>
+
+        <table>
+            <tr>
+                <td class="head-text">Pid</td>
+                <td class="head-text">Process name</td>
+                <td class="head-text">Exists</td>
+                <td class="head-text">Is running</td>
+                <td class="head-text">Username</td>
+                <td class="head-text">Memory</td>
+                <td class="head-text">Memory percent</td>
+                <td class="head-text">Cpu percent</td>
+                <td class="head-text">Thread num</td>
+                <td class="head-text">Open file num</td>
+                <td class="head-text">Connection num</td>
+            </tr>
+            {{ range $element := .Processes }}
+                <tr>
+                    <td>{{ $element.Pid }}</td>
+                    <td>{{ $element.Name }}</td>
+                    <td>{{ $element.Exists }}</td>
+                    <td>{{ $element.IsRunning }}</td>
+                    <td>{{ $element.User }}</td>
+                    <td>{{ $element.Memory }}</td>
+                    <td>{{ $element.MemPercent }}</td>
+                    <td>{{ $element.CpuPercent }}</td>
+                    <td>{{ $element.ThreadNum }}</td>
+                    <td>{{ $element.OpenFileNum }}</td>
+                    <td>{{ $element.ConnNum }}</td>
+                </tr>
+            {{ end }}
+        </table>
+        <div class="config">
+            Configuration:
+            {{ .CurrentConfig }}
+        </div>
+    </div>
+</body>
+</html>

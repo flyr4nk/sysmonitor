@@ -1,5 +1,6 @@
 # sysmonitor
 1. A simple web ui to view current system information, can be turned off
+[!webui.png](!webui.png)
 2. Configs for us to monitor a specific program and send alarm via an api specified
 3. File cleaner for specified directory
 

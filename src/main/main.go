@@ -11,5 +11,9 @@ var conf = confmgr.GetConf()
 func main() {
 	jobs.MonitorJob()
 	jobs.FileCleanerJob()
-	web.Serve()
+	if conf.Basic.EnableWebUi {
+		web.Serve()
+	} else {
+		select {}
+	}
 }
